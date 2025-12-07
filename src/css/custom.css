@@ -1,0 +1,167 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #4169E1; /* Royal Blue */
+  --ifm-color-primary-dark: #3a5ed0;
+  --ifm-color-primary-darker: #3657c4;
+  --ifm-color-primary-darkest: #2d47a2;
+  --ifm-color-primary-light: #4874f2;
+  --ifm-color-primary-lighter: #4d7af6;
+  --ifm-color-primary-lightest: #6a95ff;
+  --ifm-color-secondary: #000000; /* Black */
+  --ifm-background-color: #f0f2f5; /* Light grey for light mode background */
+  --ifm-font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --ifm-font-color-base: #333333; /* Dark grey for text in light mode */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode styles */
+[data-theme='dark'] {
+  --ifm-color-primary: #4169E1; /* Royal Blue */
+  --ifm-color-primary-dark: #3a5ed0;
+  --ifm-color-primary-darker: #3657c4;
+  --ifm-color-primary-darkest: #2d47a2;
+  --ifm-color-primary-light: #4874f2;
+  --ifm-color-primary-lighter: #4d7af6;
+  --ifm-color-primary-lightest: #6a95ff;
+  --ifm-color-secondary: #ffffff; /* White for secondary elements in dark mode */
+  --ifm-background-color: #121212; /* Dark background */
+  --ifm-font-color-base: #ffffff; /* White for text in dark mode */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.hero {
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.hero__title {
+  color: var(--ifm-color-primary);
+}
+
+.hero__subtitle {
+  color: var(--ifm-font-color-base);
+}
+
+/* Custom styles for professional look */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.footer {
+  background-color: var(--ifm-color-secondary);
+  color: var(--ifm-font-color-base);
+  padding: 2rem;
+  text-align: center;
+}
+
+[data-theme='dark'] .footer {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.featureSvg {
+  max-width: 200px; /* Adjust size of feature images */
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px; /* Slightly rounded corners for images */
+}
+
+/* Homepage specific styles */
+.homepage-section {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.homepage-section:nth-child(even) {
+  background-color: var(--ifm-background-color);
+}
+
+.homepage-section:nth-child(odd) {
+  background-color: var(--ifm-color-secondary);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] .homepage-section:nth-child(odd) {
+  background-color: #0d0d0d; /* Slightly lighter dark for contrast */
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--ifm-color-primary);
+}
+
+.section-description {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.6;
+}
+
+.book-cover {
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.review-card {
+  background-color: var(--ifm-background-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+[data-theme='dark'] .review-card {
+  background-color: #222222;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.review-text {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.review-author {
+  font-weight: bold;
+  color: var(--ifm-color-primary);
+}
+
+/* Floating animation for robots */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Generic arrow pointing effect */
+.pointing-arrow {
+  position: relative;
+  display: inline-block; /* Or block, depending on layout */
+}
+
+.pointing-arrow::after {
+  content: '→'; /* Unicode right arrow */
+  position: absolute;
+  font-size: 2rem;
+  color: var(--ifm-color-primary);
+  /* Adjust positioning as needed */
+  top: 50%;
+  right: -30px; /* Distance from the element */
+  transform: translateY(-50%);
+}

@@ -1,0 +1,5 @@
+qdrant-client
+fastapi
+uvicorn
+python-dotenv
+tenacity

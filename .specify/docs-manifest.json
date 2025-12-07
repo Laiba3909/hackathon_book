@@ -1,0 +1,172 @@
+[
+  {
+    "type": "document",
+    "id": "intro",
+    "title": "AI for Humanoids: A Technical Guide to Integrating ROS 2, Digital Twins, and Advanced AI",
+    "filepath": "docs/intro.md"
+  },
+  {
+    "type": "category",
+    "label": "Chapter 1: The Robotic Nervous System",
+    "introduction": {
+      "id": "ros-2-nervous-system/introduction",
+      "title": "Chapter 1: The Robotic Nervous System",
+      "filepath": "docs/ros-2-nervous-system/introduction.md"
+    },
+    "items": [
+      {
+        "type": "document",
+        "id": "ros-2-nervous-system/nodes-topics-services",
+        "title": "Nodes Topics Services",
+        "filepath": "docs/ros-2-nervous-system/nodes-topics-services.md"
+      },
+      {
+        "type": "document",
+        "id": "ros-2-nervous-system/rclpy-communication",
+        "title": "Rclpy Communication",
+        "filepath": "docs/ros-2-nervous-system/rclpy-communication.md"
+      },
+      {
+        "type": "document",
+        "id": "ros-2-nervous-system/urdf-humanoid",
+        "title": "Urdf Humanoid",
+        "filepath": "docs/ros-2-nervous-system/urdf-humanoid.md"
+      },
+      {
+        "type": "document",
+        "id": "ros-2-nervous-system/launch-controllers-tf",
+        "title": "Launch Controllers Tf",
+        "filepath": "docs/ros-2-nervous-system/launch-controllers-tf.md"
+      },
+      {
+        "type": "document",
+        "id": "ros-2-nervous-system/summary",
+        "title": "Chapter 1 Summary: The Robotic Nervous System",
+        "filepath": "docs/ros-2-nervous-system/summary.md"
+      }
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Chapter 2: The Digital Twin",
+    "introduction": {
+      "id": "digital-twin/introduction",
+      "title": "Chapter 2: The Digital Twin",
+      "filepath": "docs/digital-twin/introduction.md"
+    },
+    "items": [
+      {
+        "type": "document",
+        "id": "digital-twin/physics-simulation",
+        "title": "Physics Simulation",
+        "filepath": "docs/digital-twin/physics-simulation.md"
+      },
+      {
+        "type": "document",
+        "id": "digital-twin/building-worlds",
+        "title": "Building Worlds",
+        "filepath": "docs/digital-twin/building-worlds.md"
+      },
+      {
+        "type": "document",
+        "id": "digital-twin/sensor-simulation",
+        "title": "Sensor Simulation",
+        "filepath": "docs/digital-twin/sensor-simulation.md"
+      },
+      {
+        "type": "document",
+        "id": "digital-twin/unity-hri",
+        "title": "Unity Hri",
+        "filepath": "docs/digital-twin/unity-hri.md"
+      },
+      {
+        "type": "document",
+        "id": "digital-twin/summary",
+        "title": "Chapter 2 Summary: The Digital Twin",
+        "filepath": "docs/digital-twin/summary.md"
+      }
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Chapter 3: The AI-Robot Brain",
+    "introduction": {
+      "id": "ai-robot-brain/introduction",
+      "title": "Chapter 3: The AI-Robot Brain (NVIDIA Isaac)",
+      "filepath": "docs/ai-robot-brain/introduction.md"
+    },
+    "items": [
+      {
+        "type": "document",
+        "id": "ai-robot-brain/isaac-sim-synthetic-data",
+        "title": "Isaac Sim Synthetic Data",
+        "filepath": "docs/ai-robot-brain/isaac-sim-synthetic-data.md"
+      },
+      {
+        "type": "document",
+        "id": "ai-robot-brain/isaac-ros-perception",
+        "title": "Isaac Ros Perception",
+        "filepath": "docs/ai-robot-brain/isaac-ros-perception.md"
+      },
+      {
+        "type": "document",
+        "id": "ai-robot-brain/vslam-navigation-mapping",
+        "title": "Vslam Navigation Mapping",
+        "filepath": "docs/ai-robot-brain/vslam-navigation-mapping.md"
+      },
+      {
+        "type": "document",
+        "id": "ai-robot-brain/nav2-biped-planning",
+        "title": "Nav2 Biped Planning",
+        "filepath": "docs/ai-robot-brain/nav2-biped-planning.md"
+      },
+      {
+        "type": "document",
+        "id": "ai-robot-brain/summary",
+        "title": "Chapter 3 Summary: The AI-Robot Brain",
+        "filepath": "docs/ai-robot-brain/summary.md"
+      }
+    ]
+  },
+  {
+    "type": "category",
+    "label": "Chapter 4: Vision-Language-Action",
+    "introduction": {
+      "id": "vision-language-action/introduction",
+      "title": "Chapter 4: Vision-Language-Action (VLA)",
+      "filepath": "docs/vision-language-action/introduction.md"
+    },
+    "items": [
+      {
+        "type": "document",
+        "id": "vision-language-action/natural-language-to-actions",
+        "title": "Natural Language To Actions",
+        "filepath": "docs/vision-language-action/natural-language-to-actions.md"
+      },
+      {
+        "type": "document",
+        "id": "vision-language-action/whisper-voice-commands",
+        "title": "Whisper Voice Commands",
+        "filepath": "docs/vision-language-action/whisper-voice-commands.md"
+      },
+      {
+        "type": "document",
+        "id": "vision-language-action/llm-cognitive-planning",
+        "title": "Llm Cognitive Planning",
+        "filepath": "docs/vision-language-action/llm-cognitive-planning.md"
+      },
+      {
+        "type": "document",
+        "id": "vision-language-action/summary",
+        "title": "Chapter 4 Summary: Vision-Language-Action",
+        "filepath": "docs/vision-language-action/summary.md"
+      }
+    ]
+  },
+  {
+    "type": "document",
+    "id": "capstone-project",
+    "title": "Final Capstone Project: Autonomous Fetch",
+    "filepath": "docs/capstone-project.md"
+  }
+]
