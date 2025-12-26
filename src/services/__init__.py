@@ -17,8 +17,8 @@ if not QDRANT_HOST:
     raise ValueError("QDRANT_HOST environment variable not set.")
 if not QDRANT_API_KEY:
     raise ValueError("QDRANT_API_KEY environment variable not set.")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY environment variable not set.")
+# if not OPENAI_API_KEY:
+#     raise ValueError("OPENAI_API_KEY environment variable not set.")
 
 
 # --- Initialize Qdrant Client for reuse ---

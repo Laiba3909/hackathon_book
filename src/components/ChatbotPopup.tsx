@@ -1,11 +1,21 @@
 // src/components/ChatbotPopup.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
-import styles from './ChatbotPopup.module.css'; // We'll create this CSS module
+import FlexSearch from 'flexsearch';
+import styles from './ChatbotPopup.module.css';
 
+// Define the structure of a message in the chat
 interface Message {
   text: string;
   sender: 'user' | 'bot';
+}
+
+// Define the structure of a document in our search index
+interface SearchDoc {
+    id: number;
+    title: string;
+    content: string;
+    filepath: string;
 }
 
 const ChatbotPopup: React.FC = () => {
@@ -13,84 +23,115 @@ const ChatbotPopup: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Refs for the search index and the message container
+  const index = useRef(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const API_BASE_URL = 'http://localhost:8000'; // FastAPI backend URL
+  // --- Index Loading Logic ---
+  useEffect(() => {
+    // This effect runs once when the component mounts
+    setIsLoading(true);
+    console.log("Initializing chatbot and loading search index...");
 
+    // Create a new FlexSearch Document index instance
+    index.current = new FlexSearch.Document({
+        document: {
+          id: 'id',
+          index: ['title', 'content'],
+          store: ['title', 'content', 'filepath'], // Store fields to show in results
+        },
+        tokenize: 'forward',
+    });
+
+    // Fetch the pre-built index from the static directory
+    fetch('/search-index.json')
+      .then(response => response.json())
+      .then(exportedIndex => {
+        // Import each part of the exported index
+        for (const key in exportedIndex) {
+          index.current.import(key, exportedIndex[key]);
+        }
+        console.log("Chatbot index loaded successfully.");
+        setIsLoading(false);
+        // Add a welcome message
+        setMessages([{ text: "Hello! I am a standalone chatbot for this book. Ask me anything about the content.", sender: 'bot' }]);
+      })
+      .catch(error => {
+        console.error('Error loading search index:', error);
+        setIsLoading(false);
+        setMessages([{ text: "I'm sorry, my knowledge base failed to load. I am unable to answer questions right now.", sender: 'bot' }]);
+      });
+  }, []); // The empty dependency array ensures this runs only once
+
+  // --- UI and Message Handling Logic ---
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
   useEffect(scrollToBottom, [messages]);
 
-  const toggleChatbot = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleChatbot = () => setIsOpen(!isOpen);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
   };
 
+  // This function is called when the user sends a message
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputText.trim() === '') return;
+    if (inputText.trim() === '' || isLoading) return;
 
     const userMessage: Message = { text: inputText, sender: 'user' };
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setMessages(prev => [...prev, userMessage]);
     setInputText('');
     setIsLoading(true);
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/chat`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query: userMessage.text }),
+    // Simulate a slight delay for a better user experience
+    setTimeout(() => {
+      // Perform the search on the local index
+      const searchResults = index.current.search(userMessage.text, {
+        limit: 1, // We only need the top result
+        enrich: true, // This provides the document from the store
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      let botResponse: Message;
+
+      if (searchResults.length > 0 && searchResults[0].result.length > 0) {
+        // We found a relevant section in the book
+        const topResult = searchResults[0].result[0].doc as SearchDoc;
+        const answerText = `Based on the section "${topResult.title}", here is the most relevant information I found:\n\n"${topResult.content}"\n\n(Source: ${topResult.filepath})`;
+        botResponse = { text: answerText, sender: 'bot' };
+      } else {
+        // If no relevant results are found, use the required off-topic response
+        botResponse = { text: "I can only assist with questions related to this book and its chatbot. I am unable to help with other topics.", sender: 'bot' };
       }
 
-      const data = await response.json();
-      const botMessage: Message = { text: data.response || 'Sorry, I could not process that.', sender: 'bot' };
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    } catch (error) {
-      console.error('Error sending message to backend:', error);
-      const errorMessage: Message = { text: 'Oops! Something went wrong. Please try again.', sender: 'bot' };
-      setMessages((prevMessages) => [...prevMessages, errorMessage]);
-    } finally {
+      setMessages(prev => [...prev, botResponse]);
       setIsLoading(false);
-    }
+    }, 500); // 500ms delay
   };
-
+  
+  // --- JSX Rendering ---
   return (
     <>
-      <button className={styles.chatButton} onClick={toggleChatbot} title="How can I help you?">
-        {/* You can use an icon here, e.g., a chat bubble icon */}
+      <button className={styles.chatButton} onClick={toggleChatbot} title="Ask a question">
         💬
       </button>
 
       {isOpen && (
         <div className={styles.chatbotWindow}>
           <div className={styles.chatbotHeader}>
-            <span>How can I help you?</span>
-            <button className={styles.closeButton} onClick={toggleChatbot}>
-              &times;
-            </button>
+            <span>Book Chatbot</span>
+            <button className={styles.closeButton} onClick={toggleChatbot}>&times;</button>
           </div>
           <div className={styles.chatbotMessages}>
-            {messages.map((msg, index) => (
-              <div key={index} className={clsx(styles.message, styles[msg.sender])}>
-                {msg.text}
+            {messages.map((msg, idx) => (
+              <div key={idx} className={clsx(styles.message, styles[msg.sender])}>
+                {/* Use pre-wrap to respect newlines in the bot's response */}
+                <span style={{ whiteSpace: 'pre-wrap' }}>{msg.text}</span>
               </div>
             ))}
-            {isLoading && (
-              <div className={clsx(styles.message, styles.bot)}>
-                Typing...
-              </div>
-            )}
+            {isLoading && <div className={clsx(styles.message, styles.bot)}><span>Typing...</span></div>}
             <div ref={messagesEndRef} />
           </div>
           <form className={styles.chatbotInput} onSubmit={sendMessage}>
@@ -98,12 +139,10 @@ const ChatbotPopup: React.FC = () => {
               type="text"
               value={inputText}
               onChange={handleInputChange}
-              placeholder="Ask me anything about the book..."
-              disabled={isLoading}
+              placeholder={isLoading || !index.current ? "Loading knowledge..." : "Ask about the book..."}
+              disabled={isLoading || !index.current}
             />
-            <button type="submit" disabled={isLoading}>
-              Send
-            </button>
+            <button type="submit" disabled={isLoading || !index.current}>Send</button>
           </form>
         </div>
       )}

@@ -1,0 +1,1 @@
+2025-12-26 10:20:31,303 - src.embeddings_pipeline.embedder - CRITICAL - OPENAI_API_KEY environment variable not set.

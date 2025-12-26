@@ -1,0 +1,2 @@
+2025-12-26 10:48:41,737 - src.embeddings_pipeline.qdrant_client - INFO - QdrantClientWrapper initialized.
+2025-12-26 10:48:43,419 - src.embeddings_pipeline.qdrant_client - INFO - QdrantClientWrapper initialized.

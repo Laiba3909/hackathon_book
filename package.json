@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "npm run build:search && docusaurus start",
+    "build": "npm run build:search && docusaurus build",
+    "build:search": "node scripts/build-search-index.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -17,11 +18,17 @@
   "dependencies": {
     "@docusaurus/core": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
+    "@google/generative-ai": "^0.24.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
+    "flexsearch": "^0.8.212",
+    "glob": "^13.0.0",
+    "gray-matter": "^4.0.3",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "remark": "^15.0.1",
+    "strip-markdown": "^6.0.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.9.2",

@@ -21,7 +21,7 @@ class QdrantClientWrapper:
             raise ValueError("QDRANT_HOST and QDRANT_API_KEY must be set in the environment variables.")
         
         self.client = QdrantClient(
-            host=QDRANT_HOST, 
+            url=QDRANT_HOST, 
             api_key=QDRANT_API_KEY
         )
         logger.info("QdrantClientWrapper initialized.")

@@ -3,3 +3,9 @@ fastapi
 uvicorn
 python-dotenv
 tenacity
+openai
+sentence-transformers
+numpy
+httpx
+torch
+transformers

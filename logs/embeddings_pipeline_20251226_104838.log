@@ -1,0 +1,1 @@
+2025-12-26 10:48:41,738 - src.embeddings_pipeline.embedder - INFO - Embedder initialized with Google Gemini model: models/embedding-001
